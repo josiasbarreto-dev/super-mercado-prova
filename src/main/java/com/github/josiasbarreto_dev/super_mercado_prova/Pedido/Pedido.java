@@ -4,6 +4,7 @@ import com.github.josiasbarreto_dev.super_mercado_prova.Item.Item;
 import com.github.josiasbarreto_dev.super_mercado_prova.Produto.Produto;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Pedido {
     private ArrayList<Item> listaDeItens;
@@ -44,5 +45,27 @@ public class Pedido {
         System.out.println("Lista de Itens: " + getListaDeItens() + "Total: R$ " + valorTotalDoPedido);
     }
 
-    
+    public void imprimeValorTotal(){
+        //todo
+    }
+
+    public void adicionaItem(){
+        //todo
+    }
+
+    public String recebeNomeDoTeclado(){
+        Scanner scan = new Scanner(System.in);
+        return scan.nextLine();
+    }
+
+    public int recebeQuantidadeDoTeclado(){
+        Scanner scan = new Scanner(System.in);
+        return scan.nextInt();
+    }
+
+    public void limparCarrinho(){
+        //todo
+    }
+
+
 }
