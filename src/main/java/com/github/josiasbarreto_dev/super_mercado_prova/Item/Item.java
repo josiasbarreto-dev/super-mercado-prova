@@ -36,8 +36,9 @@ public class Item {
         this.valorDoItem = valorDoItem;
     }
 
-    public void defineValorTotal(){
-        double valorTotal = getValorDoItem() * getQuantidade();
-        System.out.println("O valor total do Item é: R$ " + valorTotal);
+    public double defineValorTotal() {
+        double valorTotal = produto.getPreco() * quantidade;
+        setValorDoItem(valorTotal);
+        return valorTotal;
     }
 }
