@@ -38,7 +38,7 @@ public class Menu {
                     int quantidade = pedido.receberQuantidadeDoTeclado();
 
                     Produto produto = estoque.encontrarProdutoPorNome(nome);
-                    if (produto != null && estoque.temEstoqueOuNao(produto, quantidade)) {
+                    if (produto != null && estoque.temEstoque(produto, quantidade)) {
                         pedido.adicionarItemNaLista(produto, quantidade);
                         estoque.darBaixaEmEstoque(produto.getId(), quantidade);
                     } else {
