@@ -1,13 +1,12 @@
 package com.github.josiasbarreto_dev.super_mercado_prova;
 
-import org.springframework.boot.SpringApplication;
+import com.github.josiasbarreto_dev.super_mercado_prova.Menu.Menu;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class SuperMercadoProvaApplication {
-
 	public static void main(String[] args) {
-		SpringApplication.run(SuperMercadoProvaApplication.class, args);
+		Menu menu = new Menu();
+		menu.controlaMenu();
 	}
-
 }
