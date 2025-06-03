@@ -27,7 +27,7 @@ public class Pedido {
         }
     }
 
-    public boolean adicionaItemNaLista(Produto produto, int quantidade) {
+    public boolean adicionarItemNaLista(Produto produto, int quantidade) {
         if (produto.getQuantidadeEmEstoque() >= quantidade) {
             listaItens.add(new Item(produto, quantidade));
             calcularValorTotal();
@@ -36,17 +36,17 @@ public class Pedido {
         return false;
     }
 
-    public void imprimePedido() {
+    public void imprimirPedido() {
         for (Item item : listaItens) {
             System.out.printf("Produto: %s | Quantidade: %d | Total: %.2f\n",
                     item.getProduto().getNome(),
                     item.getQuantidade(),
                     item.getProduto().getPreco());
         }
-        imprimeValorTotal();
+        imprimirValorTotal();
     }
 
-    public void imprimeValorTotal() {
+    public void imprimirValorTotal() {
         System.out.printf("Valor Total do Pedido: %.2f\n", valorTotalDoPedido);
     }
 
@@ -55,12 +55,12 @@ public class Pedido {
         valorTotalDoPedido = 0.0;
     }
 
-    public String recebeNomeDoTeclado() {
+    public String receberNomeDoTeclado() {
         System.out.print("Nome do produto: ");
         return scanner.nextLine();
     }
 
-    public int recebeQuantidadeDoTeclado() {
+    public int receberQuantidadeDoTeclado() {
         System.out.print("Quantidade: ");
         return scanner.nextInt();
     }

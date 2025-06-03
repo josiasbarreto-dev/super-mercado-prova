@@ -12,7 +12,7 @@ public class Menu {
     private Scanner scanner = new Scanner(System.in);
 
     public void controlaMenu() {
-        estoque.inicializaEstoque();
+        estoque.inicializarEstoque();
         boolean continuar = true;
 
         while (continuar) {
@@ -32,24 +32,24 @@ public class Menu {
                     break;
                 case 2:
                     System.out.println("Informe o nome do produto:");
-                    String nome = pedido.recebeNomeDoTeclado();
+                    String nome = pedido.receberNomeDoTeclado();
 
                     System.out.println("Informe a quantidade:");
-                    int quantidade = pedido.recebeQuantidadeDoTeclado();
+                    int quantidade = pedido.receberQuantidadeDoTeclado();
 
-                    Produto produto = estoque.encontraProduto(nome);
+                    Produto produto = estoque.encontrarProdutoPorNome(nome);
                     if (produto != null && estoque.temEstoqueOuNao(produto, quantidade)) {
-                        pedido.adicionaItemNaLista(produto, quantidade);
+                        pedido.adicionarItemNaLista(produto, quantidade);
                         estoque.darBaixaEmEstoque(produto.getId(), quantidade);
                     } else {
                         System.out.println("Produto não encontrado ou estoque insuficiente.");
                     }
                     break;
                 case 3:
-                    pedido.imprimePedido();
+                    pedido.imprimirPedido();
                     break;
                 case 4:
-                    pedido.imprimePedido();
+                    pedido.imprimirPedido();
                     pedido.limparCarrinho();
                     break;
                 case 5:
@@ -79,7 +79,7 @@ public class Menu {
     }
 
     public void mostraEstoque() {
-        estoque.imprimeCatalogoDoEstoque();
+        estoque.imprimirCatalogoDoEstoque();
     }
 
     public double defineTrocoAReceber(double valorPago) {

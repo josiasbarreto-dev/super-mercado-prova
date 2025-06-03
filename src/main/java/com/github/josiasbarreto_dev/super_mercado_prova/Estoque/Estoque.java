@@ -28,7 +28,7 @@ public class Estoque {
         this.listaDeProdutos = listaDeProdutos;
     }
 
-    public void inicializaEstoque(){
+    public void inicializarEstoque(){
         Produto produto1 = new Produto(1, "Caneta", 3.50, 10);
         Produto produto2 = new Produto(2, "Lápis", 1.50, 5);
         Produto produto3 = new Produto(3, "Borracha", 0.50, 100);
@@ -39,34 +39,34 @@ public class Estoque {
         Produto produto8 = new Produto(8, "Cola branca", 5.00, 25);
         Produto produto9 = new Produto(9, "Tesoura escolar", 6.50, 18);
 
-         cadastraProduto(produto1);
-         cadastraProduto(produto2);
-         cadastraProduto(produto3);
-         cadastraProduto(produto4);
-         cadastraProduto(produto5);
-         cadastraProduto(produto6);
-         cadastraProduto(produto7);
-         cadastraProduto(produto8);
-         cadastraProduto(produto9);
+         cadastrarProduto(produto1);
+         cadastrarProduto(produto2);
+         cadastrarProduto(produto3);
+         cadastrarProduto(produto4);
+         cadastrarProduto(produto5);
+         cadastrarProduto(produto6);
+         cadastrarProduto(produto7);
+         cadastrarProduto(produto8);
+         cadastrarProduto(produto9);
     }
 
-    public Produto encontraProduto(String nome){
+    public Produto encontrarProdutoPorNome(String nome){
        return getListaDeProdutos().stream()
                .filter(p -> p.getNome().equalsIgnoreCase(nome))
                .findFirst().orElse(null);
     }
 
-    public Produto encontraProduto(int id){
+    public Produto encontrarProdutoPorID(int id){
         return getListaDeProdutos().stream()
                 .filter(p -> p.getId() == id)
                 .findFirst().orElse(null);
     }
 
-    public boolean cadastraProduto(Produto produto){
+    public boolean cadastrarProduto(Produto produto){
         return getListaDeProdutos().add(produto);
     }
 
-    public void imprimeCatalogoDoEstoque(){
+    public void imprimirCatalogoDoEstoque(){
         for(Produto p : listaDeProdutos){
             System.out.printf("ID: %d | Nome: %s | Preço: %.2f | Quantidade: %d\n",
                     p.getId(), p.getNome(), p.getPreco(), p.getQuantidadeEmEstoque());
@@ -74,20 +74,20 @@ public class Estoque {
     }
 
     public boolean darBaixaEmEstoque(String nome, int quantidadeParaDarBaixa){
-        Produto p = encontraProduto(nome);
-        if(p != null && p.getQuantidadeEmEstoque() >= quantidadeParaDarBaixa){
-            int total = p.getQuantidadeEmEstoque() - quantidadeParaDarBaixa;
-            p.setQuantidadeEmEstoque(total);
+        Produto produto = encontrarProdutoPorNome(nome);
+        if(produto != null && temEstoque(produto, id)){
+            int total = produto.getQuantidadeEmEstoque() - quantidadeParaDarBaixa;
+            produto.setQuantidadeEmEstoque(total);
             return true;
         }
         return false;
     }
 
     public boolean darBaixaEmEstoque(int id, int quantidadeParaDarBaixa){
-       Produto p = encontraProduto(id);
-       if (p != null && p.getQuantidadeEmEstoque() >= quantidadeParaDarBaixa){
-           int total = p.getQuantidadeEmEstoque() - quantidadeParaDarBaixa;
-           p.setQuantidadeEmEstoque(total);
+       Produto produto = encontrarProdutoPorID(id);
+       if (produto != null && temEstoque(produto, id)){
+           int total = produto.getQuantidadeEmEstoque() - quantidadeParaDarBaixa;
+           produto.setQuantidadeEmEstoque(total);
            return true;
        }
         return false;
@@ -101,7 +101,7 @@ public class Estoque {
         return listaDeProdutos.indexOf(produto) + 1;
     }
 
-    public boolean temEstoqueOuNao(Produto produto, int quantidadeParaDarBaixa){
+    public boolean temEstoque (Produto produto, int quantidadeParaDarBaixa){
        return  getQuantidadeAtualEmEstoque(produto) >= quantidadeParaDarBaixa;
     }
 }
