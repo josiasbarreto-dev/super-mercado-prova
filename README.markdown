@@ -20,7 +20,10 @@ O projeto é composto pelas seguintes classes:
 
 ### 📊 Diagrama de Classes
 
-O projeto foi implementado conforme o diagrama de classes UML fornecido na prova (ver imagem da atividade).
+O projeto foi implementado conforme o diagrama de classes UML abaixo.
+
+![Diagrama de Classes do Projeto SuperMercadoProva](docs/supermercado_class_diagram.png)
+
 
 ## ✅ Funcionalidades
 
@@ -32,7 +35,7 @@ O projeto foi implementado conforme o diagrama de classes UML fornecido na prova
 
 ### 💰 Tarefa B - Cálculo do Troco
 
-- Implementado método `calcularTroco(double valorPago)` na classe `Pedido` ou `Menu`.
+- Implementado método `calcularTroco(double valorPago)` na classe `Menu`.
 - O método retorna a diferença entre valor pago e valor total da compra.
 
 ### 🧮 Tarefa C - Menor Quantidade de Notas
