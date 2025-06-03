@@ -1,7 +1,6 @@
 package com.github.josiasbarreto_dev.super_mercado_prova.Menu;
 
 import com.github.josiasbarreto_dev.super_mercado_prova.Estoque.Estoque;
-import com.github.josiasbarreto_dev.super_mercado_prova.Item.Item;
 import com.github.josiasbarreto_dev.super_mercado_prova.Pedido.Pedido;
 import com.github.josiasbarreto_dev.super_mercado_prova.Produto.Produto;
 
@@ -60,7 +59,9 @@ public class Menu {
 
                     if (valorPago >= pedido.getValorTotalDoPedido()) {
                         System.out.println("Pagamento realizado com sucesso!");
-                        defineTrocoAReceber(valorPago);
+                        double troco = defineTrocoAReceber(valorPago);
+                        System.out.printf("Troco a receber: %.2f\n", troco);
+                        System.out.println("Menor quantidade de notas para o troco: " + calculaQuantidadeDeNotas(troco));
                         pedido.limparCarrinho();
                     } else {
                         System.out.println("Valor pago é insuficiente.");
@@ -81,8 +82,23 @@ public class Menu {
         estoque.imprimeCatalogoDoEstoque();
     }
 
-    public void defineTrocoAReceber(double valorPago) {
-        double troco = valorPago - pedido.getValorTotalDoPedido();
-        System.out.printf("Troco a receber: %.2f\n", troco);
+    public double defineTrocoAReceber(double valorPago) {
+        return valorPago - pedido.getValorTotalDoPedido();
     }
+
+    //todo: Desenvolver um método onde recebe o valor do troco e calcule a menor quantidade de notas. (difícil)
+    public int calculaQuantidadeDeNotas(double valorTroco) {
+        int[] notas = {100, 50, 20, 10, 5, 2};
+        int quantidadeNotas = 0;
+        int trocoInteiro = (int) valorTroco; // Considera só a parte inteira
+
+        for (int nota : notas) {
+            int qtd = trocoInteiro / nota; // calcula quantas notas dessa são necessárias
+            quantidadeNotas += qtd;
+            trocoInteiro %= nota; // reduz o troco
+        }
+
+        return quantidadeNotas;
+    }
+
 }
