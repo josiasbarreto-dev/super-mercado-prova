@@ -7,22 +7,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Pedido {
-    private ArrayList<Item> listaDeItens;
-    private double valorTotalDoPedido = 0;
+    private ArrayList<Item> listaItens = new ArrayList<>();
+    private double valorTotalDoPedido = 0.0;
 
-    public Pedido(ArrayList<Item> listaDeItens, double valorTotalDoPedido) {
-        this.listaDeItens = listaDeItens;
-        this.valorTotalDoPedido = valorTotalDoPedido;
-    }
-
-    public ArrayList<Item> getListaDeItens() {
-        return listaDeItens;
-    }
-
-
-    public void setListaDeItens(ArrayList<Item> listaDeItens) {
-        this.listaDeItens = listaDeItens;
-    }
+    Scanner scanner = new Scanner(System.in);
 
     public double getValorTotalDoPedido() {
         return valorTotalDoPedido;
@@ -32,40 +20,48 @@ public class Pedido {
         this.valorTotalDoPedido = valorTotalDoPedido;
     }
 
-    public void calculaValorTotal(){
-        //todo
+    public void calcularValorTotal() {
+        valorTotalDoPedido = 0.0;
+        for (Item item : listaItens) {
+            valorTotalDoPedido += (double) item.defineValorTotal();
+        }
     }
 
-    public boolean adicionaItemNaLista(Produto produto, int quantidade){
-        //todo
-        return true;
+    public boolean adicionaItemNaLista(Produto produto, int quantidade) {
+        if (produto.getQuantidadeEmEstoque() >= quantidade) {
+            listaItens.add(new Item(produto, quantidade));
+            calcularValorTotal();
+            return true;
+        }
+        return false;
     }
 
-    public void imprimePedido(){
-        System.out.println("Lista de Itens: " + getListaDeItens() + "Total: R$ " + valorTotalDoPedido);
+    public void imprimePedido() {
+        for (Item item : listaItens) {
+            System.out.printf("Produto: %s | Quantidade: %d | Total: %.2f\n",
+                    item.getProduto().getNome(),
+                    item.getQuantidade(),
+                    item.getProduto().getPreco());
+        }
+        imprimeValorTotal();
     }
 
-    public void imprimeValorTotal(){
-        //todo
+    public void imprimeValorTotal() {
+        System.out.printf("Valor Total do Pedido: %.2f\n", valorTotalDoPedido);
     }
 
-    public void adicionaItem(){
-        //todo
+    public void limparCarrinho() {
+        listaItens.clear();
+        valorTotalDoPedido = 0.0;
     }
 
-    public String recebeNomeDoTeclado(){
-        Scanner scan = new Scanner(System.in);
-        return scan.nextLine();
+    public String recebeNomeDoTeclado() {
+        System.out.print("Nome do produto: ");
+        return scanner.nextLine();
     }
 
-    public int recebeQuantidadeDoTeclado(){
-        Scanner scan = new Scanner(System.in);
-        return scan.nextInt();
+    public int recebeQuantidadeDoTeclado() {
+        System.out.print("Quantidade: ");
+        return scanner.nextInt();
     }
-
-    public void limparCarrinho(){
-        //todo
-    }
-
-
 }
